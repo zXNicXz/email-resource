@@ -25,6 +25,7 @@ type Input struct {
 		Headers       string
 		HeadersText   string `json:"headers_text"`
 		To            string `json:"to"`
+		ToText        string `json:"to_text"`
 	}
 }
 
