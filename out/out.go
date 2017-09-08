@@ -114,14 +114,13 @@ func Execute(sourceRoot, version string, input []byte) (string, error) {
 		return "", err
 	}
 
-	if indata.Params.To != "" {
-		var toList string
-		toList, err = readSource(indata.Params.To)
-		if err != nil {
-			return "", err
-		}
-		if len(toList) > 0 {
-			toListArray := strings.Split(toList, ",")
+	recipientsTo, err := fromTextOrFile(indata.Params.ToText, indata.Params.To)
+	if err != nil {
+		return "", err
+	}
+	if recipientsTo != "" {
+		if len(recipientsTo) > 0 {
+			toListArray := strings.Split(recipientsTo, ",")
 			for _, toAddress := range toListArray {
 				indata.Source.To = append(indata.Source.To, strings.TrimSpace(toAddress))
 			}
